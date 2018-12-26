@@ -6,7 +6,11 @@
 
     <groupId>org.lemonframework.disruptor</groupId>
     <artifactId>lemon-disruptor</artifactId>
+    <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>lemon-disruptor-core</module>
+    </modules>
 
 
 </project>

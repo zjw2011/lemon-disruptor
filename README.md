@@ -1,2 +1,2 @@
 # lemon-spring-disruptor
-lemon spring disruptor
+lemon disruptor

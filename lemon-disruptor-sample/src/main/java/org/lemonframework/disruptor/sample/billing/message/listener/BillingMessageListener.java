@@ -3,6 +3,9 @@ package org.lemonframework.disruptor.sample.billing.message.listener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import org.apache.commons.lang3.StringUtils;
 import org.lemonframework.disruptor.publisher.EventPublisher;
 import org.lemonframework.disruptor.sample.billing.model.BillingRecord;
@@ -13,10 +16,12 @@ import org.lemonframework.disruptor.sample.billing.model.BillingRecord;
  * @author jiawei zhang
  * @since 0.0.1
  */
+@Component
 public class BillingMessageListener {
 
     private static final Logger LOG = LoggerFactory.getLogger(BillingMessageListener.class);
 
+    @Autowired
     private EventPublisher<BillingRecord> billingEventPublisher;
 
     public void inMessage(String number) {

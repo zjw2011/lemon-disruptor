@@ -3,13 +3,18 @@ package org.lemonframework.disruptor.sample.datastream.message.listener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import org.apache.commons.lang3.StringUtils;
 import org.lemonframework.disruptor.publisher.EventPublisher;
 import org.lemonframework.disruptor.sample.datastream.model.DataStream;
 
+@Component
 public class DataStreamMessageListener {
     private static final Logger LOG = LoggerFactory.getLogger(DataStreamMessageListener.class);
 
+    @Autowired
     private EventPublisher<DataStream> dataStreamEventPublisher;
 
     public void inMessage(String number) {

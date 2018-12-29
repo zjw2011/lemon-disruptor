@@ -1,5 +1,6 @@
 package org.lemonframework.disruptor.sample.config;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,6 +14,7 @@ import org.lemonframework.disruptor.sample.billing.disruptor.eventprocessor.Bill
 import org.lemonframework.disruptor.sample.billing.disruptor.eventprocessor.CorporateBillingBusinessEventProcessor;
 import org.lemonframework.disruptor.sample.billing.disruptor.eventprocessor.CustomerSpecificBillingBusinessEventProcessor;
 import org.lemonframework.disruptor.sample.billing.disruptor.eventprocessor.JournalBillingEventProcessor;
+import org.lemonframework.disruptor.sample.billing.disruptor.publisher.BillingEventPublisher;
 import org.lemonframework.disruptor.sample.billing.model.BillingRecord;
 import org.lemonframework.disruptor.sample.billing.service.BillingService;
 import org.lemonframework.disruptor.sample.billing.service.BillingServiceImpl;
@@ -80,8 +82,6 @@ public class BillingDisruptorConfig {
         BillingEvent billingEvent = new BillingEvent();
         defaultDisruptorConfig.setEventFactory(billingEvent);
 
-        JournalBillingEventProcessor journalBillingEventProcessor = journalBillingEventProcessor();
-
         final EventHandler[] currentEventHandlers = {
                 journalBillingEventProcessor(),
                 billingValidationEventProcessor()
@@ -111,6 +111,14 @@ public class BillingDisruptorConfig {
         defaultDisruptorConfig.setEventHandlerChain(new EventHandlerChain[] {eventHandlerChain, eventHandlerChain2});
 
         return defaultDisruptorConfig;
+    }
+
+    @Bean
+    @ConditionalOnBean(name = "billingDisruptor")
+    public BillingEventPublisher billingEventPublisher() {
+        BillingEventPublisher billingEventPublisher = new BillingEventPublisher();
+        billingEventPublisher.setDisruptorConfig(billingDisruptor());
+        return billingEventPublisher;
     }
 
 }

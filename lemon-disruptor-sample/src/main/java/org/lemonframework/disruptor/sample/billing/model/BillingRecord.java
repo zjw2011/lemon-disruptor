@@ -56,4 +56,15 @@ public class BillingRecord implements Serializable {
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
+
+    @Override
+    public String toString() {
+        return "BillingRecord{" +
+                "billingId=" + billingId +
+                ", billable=" + billable +
+                ", quantity=" + quantity +
+                ", billableArtifactName='" + billableArtifactName + '\'' +
+                ", customerName='" + customerName + '\'' +
+                '}';
+    }
 }

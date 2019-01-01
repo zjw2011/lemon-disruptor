@@ -95,17 +95,11 @@ public class BillingDisruptorConfig {
 
         EventHandlerChain<BillingRecord> eventHandlerChain = new EventHandlerChain<>(currentEventHandlers, nextEventHandlers);
 
-        final EventHandler[] currentEventHandlers2 = {
-                billingBusinessEventProcessor(),
-                corporateBillingBusinessEventProcessor(),
-                customerSpecificBillingBusinessEventProcessor()
-        };
-
         final EventHandler[] nextEventHandlers2 = {
                 billingOutboundFormattingEventProcessor()
         };
 
-        EventHandlerChain<BillingRecord> eventHandlerChain2 = new EventHandlerChain<>(currentEventHandlers2, nextEventHandlers2);
+        EventHandlerChain<BillingRecord> eventHandlerChain2 = new EventHandlerChain<>(nextEventHandlers, nextEventHandlers2);
 
 
         defaultDisruptorConfig.setEventHandlerChain(new EventHandlerChain[] {eventHandlerChain, eventHandlerChain2});

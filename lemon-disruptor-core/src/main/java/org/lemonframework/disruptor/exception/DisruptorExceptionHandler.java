@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.lmax.disruptor.ExceptionHandler;
 
 /**
- * desc.
+ * exception handler.
  *
  * @author jiawei zhang
  * @since 0.0.1

@@ -1,12 +1,18 @@
 package org.lemonframework.disruptor.sample.config;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 
 import com.lmax.disruptor.EventHandler;
 import org.lemonframework.disruptor.DefaultDisruptorConfig;
 import org.lemonframework.disruptor.EventHandlerChain;
+import org.lemonframework.disruptor.sample.Animal;
+import org.lemonframework.disruptor.sample.Person;
+import org.lemonframework.disruptor.sample.User;
 import org.lemonframework.disruptor.sample.billing.disruptor.eventfactory.BillingEvent;
 import org.lemonframework.disruptor.sample.billing.disruptor.eventprocessor.BillingBusinessEventProcessor;
 import org.lemonframework.disruptor.sample.billing.disruptor.eventprocessor.BillingOutboundFormattingEventProcessor;
@@ -93,18 +99,69 @@ public class BillingDisruptorConfig {
                 customerSpecificBillingBusinessEventProcessor()
         };
 
-        EventHandlerChain<BillingRecord> eventHandlerChain = new EventHandlerChain<>(currentEventHandlers, nextEventHandlers);
+
 
         final EventHandler[] nextEventHandlers2 = {
                 billingOutboundFormattingEventProcessor()
         };
 
+        //每次都要创建新的bean
+        EventHandlerChain<BillingRecord> eventHandlerChain = new EventHandlerChain<>(currentEventHandlers, nextEventHandlers);
         EventHandlerChain<BillingRecord> eventHandlerChain2 = new EventHandlerChain<>(nextEventHandlers, nextEventHandlers2);
-
 
         defaultDisruptorConfig.setEventHandlerChain(new EventHandlerChain[] {eventHandlerChain, eventHandlerChain2});
 
         return defaultDisruptorConfig;
+    }
+
+    @Bean
+    @Scope("prototype")
+    public EventHandlerChain<BillingRecord> eventHandlerChain() {
+        final EventHandler[] currentEventHandlers = {
+                journalBillingEventProcessor(),
+                billingValidationEventProcessor()
+        };
+        final EventHandler[] nextEventHandlers = {
+                billingBusinessEventProcessor(),
+                corporateBillingBusinessEventProcessor(),
+                customerSpecificBillingBusinessEventProcessor()
+        };
+        EventHandlerChain<BillingRecord> eventHandlerChain = new EventHandlerChain<>(currentEventHandlers, nextEventHandlers);
+        return eventHandlerChain;
+    }
+
+    @Bean
+    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE, proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public EventHandlerChain<BillingRecord> eventHandlerChain2() {
+        final EventHandler[] nextEventHandlers = {
+                billingBusinessEventProcessor(),
+                corporateBillingBusinessEventProcessor(),
+                customerSpecificBillingBusinessEventProcessor()
+        };
+        final EventHandler[] nextEventHandlers2 = {
+                billingOutboundFormattingEventProcessor()
+        };
+        EventHandlerChain<BillingRecord> eventHandlerChain = new EventHandlerChain<>(nextEventHandlers, nextEventHandlers2);
+        return eventHandlerChain;
+    }
+
+    @Bean
+    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE, proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public User user() {
+        return new User();
+    }
+
+    @Bean
+    public Person person() {
+        Person p = new Person();
+        p.setUser(user());
+        return p;
+    }
+
+    @Bean
+    @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public Animal animal() {
+        return new Animal();
     }
 
     @Bean

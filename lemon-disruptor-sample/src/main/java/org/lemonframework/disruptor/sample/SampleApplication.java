@@ -25,8 +25,20 @@ public class SampleApplication {
     @Autowired
     private DataStreamMessageListener dataStreamMessageListener;
 
+    @Autowired
+    private Person person;
+
+    @Autowired
+    private Animal animal;
+
     public static void main(String[] args) {
         SpringApplication.run(SampleApplication.class, args);
+    }
+
+    @GetMapping("/test/person")
+    public void testPerson() {
+        System.out.println(animal);
+        System.out.println(person.getUser());
     }
 
     @GetMapping("/test/billing")

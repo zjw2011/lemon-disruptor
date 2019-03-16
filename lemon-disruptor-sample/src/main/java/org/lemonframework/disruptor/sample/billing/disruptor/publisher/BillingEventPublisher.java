@@ -1,5 +1,6 @@
 package org.lemonframework.disruptor.sample.billing.disruptor.publisher;
 
+import org.lemonframework.disruptor.DefaultDisruptorConfig;
 import org.lemonframework.disruptor.DisruptorConfig;
 import org.lemonframework.disruptor.publisher.EventPublisher;
 import org.lemonframework.disruptor.sample.billing.disruptor.eventtranslator.BillingEventTranslator;
@@ -17,6 +18,8 @@ public class BillingEventPublisher implements EventPublisher<BillingRecord> {
 
     @Override
     public void publish(BillingRecord billingRecord){
+        DefaultDisruptorConfig<BillingRecord> defaultDisruptorConfig = (DefaultDisruptorConfig<BillingRecord>) disruptorConfig;
+//        defaultDisruptorConfig.setEventHandlerChain();
         disruptorConfig.publish(new BillingEventTranslator(billingRecord));
     }
 

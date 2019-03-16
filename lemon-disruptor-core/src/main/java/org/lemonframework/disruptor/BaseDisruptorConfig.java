@@ -1,6 +1,7 @@
 package org.lemonframework.disruptor;
 
 import java.util.StringJoiner;
+import java.util.concurrent.Executor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,11 +27,15 @@ public abstract class BaseDisruptorConfig<T> extends AbstractDisruptorLifecycleM
     private WaitStrategyType waitStrategyType = WaitStrategyType.BLOCKING;
 
     private EventFactory<T> eventFactory;
+    private Executor executor;
 
     @Override
     public void init(){
-        Validate.notNull(getThreadName());
+        if (executor != null) {
+            this.setThreadName("__executor__");
+        }
         Validate.notNull(getEventFactory());
+        Validate.notNull(getThreadName());
 
         createThreadFactory();
         configureDisruptor();
@@ -54,13 +59,23 @@ public abstract class BaseDisruptorConfig<T> extends AbstractDisruptorLifecycleM
         String disruptorConfigString = getDisruptorConfiguration();
         LOG.info("Going to create a LMAX disruptor "+ disruptorConfigString);
 
-        setDisruptor(new Disruptor<T>(
-                getEventFactory(),
-                getRingBufferSize(),
-                getThreadFactory(),
-                getProducerType(),
-                getWaitStrategyType().instance()
-        ));
+        if (executor != null) {
+            setDisruptor(new Disruptor<T>(
+                    getEventFactory(),
+                    getRingBufferSize(),
+                    executor,
+                    getProducerType(),
+                    getWaitStrategyType().instance()
+            ));
+        } else {
+            setDisruptor(new Disruptor<T>(
+                    getEventFactory(),
+                    getRingBufferSize(),
+                    getThreadFactory(),
+                    getProducerType(),
+                    getWaitStrategyType().instance()
+            ));
+        }
 
         LOG.info("Created and configured LMAX disruptor "+ disruptorConfigString);
     }
@@ -126,4 +141,11 @@ public abstract class BaseDisruptorConfig<T> extends AbstractDisruptorLifecycleM
         this.eventFactory = eventFactory;
     }
 
+    public Executor getExecutor() {
+        return executor;
+    }
+
+    public void setExecutor(Executor executor) {
+        this.executor = executor;
+    }
 }

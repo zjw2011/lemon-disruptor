@@ -9,8 +9,8 @@
     <packaging>pom</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>lemon-disruptor-core</module>
-        <module>lemon-disruptor-proxy</module>
+        <module>disruptor-core</module>
+        <module>disruptor-sample</module>
     </modules>
 
 

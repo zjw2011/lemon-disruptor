@@ -31,7 +31,9 @@ public class DisruptorProperties {
 
     private int bufferSize = 4096;
 
-    private int consumerSize = 16;
+    private int consumerSize = 1;
+
+    private int threadPoolSize = 16;
 
     private String consumerName = "lemon";
 
@@ -47,17 +49,23 @@ public class DisruptorProperties {
         return consumerSize;
     }
 
-    public DisruptorProperties setConsumerSize(int consumerSize) {
+    public void setConsumerSize(int consumerSize) {
         this.consumerSize = consumerSize;
-        return this;
+    }
+
+    public int getThreadPoolSize() {
+        return threadPoolSize;
+    }
+
+    public void setThreadPoolSize(int threadPoolSize) {
+        this.threadPoolSize = threadPoolSize;
     }
 
     public String getConsumerName() {
         return consumerName;
     }
 
-    public DisruptorProperties setConsumerName(String consumerName) {
+    public void setConsumerName(String consumerName) {
         this.consumerName = consumerName;
-        return this;
     }
 }

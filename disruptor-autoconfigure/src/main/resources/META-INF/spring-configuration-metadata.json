@@ -10,9 +10,16 @@
   "properties": [
     {
       "sourceType": "org.lemonframework.disruptor.autoconfigure.DisruptorProperties",
-      "defaultValue": 64,
+      "defaultValue": 1,
       "name": "lemon.disruptor.consumerSize",
       "description": "Consumser size.",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "org.lemonframework.disruptor.autoconfigure.DisruptorProperties",
+      "defaultValue": 16,
+      "name": "lemon.disruptor.threadPoolSize",
+      "description": "Thread Pool size.",
       "type": "java.lang.Integer"
     },
     {

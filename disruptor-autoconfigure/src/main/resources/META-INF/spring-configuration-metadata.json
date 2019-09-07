@@ -1,0 +1,33 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "name": "lemon.disruptor",
+      "sourceType": "org.lemonframework.disruptor.autoconfigure.DisruptorProperties",
+      "type": "org.lemonframework.disruptor.autoconfigure.DisruptorProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "org.lemonframework.disruptor.autoconfigure.DisruptorProperties",
+      "defaultValue": 64,
+      "name": "lemon.disruptor.consumerSize",
+      "description": "Consumser size.",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "org.lemonframework.disruptor.autoconfigure.DisruptorProperties",
+      "defaultValue": 4096,
+      "name": "lemon.disruptor.bufferSize",
+      "description": "buffer size.",
+      "type": "java.lang.Integer"
+    },
+    {
+      "sourceType": "org.lemonframework.disruptor.autoconfigure.DisruptorProperties",
+      "defaultValue": "lemon",
+      "name": "lemon.disruptor.consumerName",
+      "description": "Consumser Name.",
+      "type": "java.lang.String"
+    }
+  ]
+}

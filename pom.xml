@@ -16,6 +16,8 @@
     <version>2.1.0-SNAPSHOT</version>
     <modules>
         <module>disruptor-core</module>
+        <module>disruptor-autoconfigure</module>
+        <module>disruptor-starter</module>
     </modules>
 
 

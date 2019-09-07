@@ -55,6 +55,9 @@ public class AsyncProducer implements Disposable {
     }
 
     protected AsyncProducer(Builder builder) {
+
+        builder.validate();
+
         Executor executor = builder.executor;
         if (executor == null) {
             //优化
@@ -182,6 +185,25 @@ public class AsyncProducer implements Disposable {
         public Builder setConsumer(AsyncConsumer consumer) {
             this.consumer = consumer;
             return this;
+        }
+
+        /**
+         * Initializes a {@link AsyncProducer} as specified through this Builder.
+         *
+         * @return a {@link AsyncProducer} as specified through this Builder
+         */
+        public AsyncProducer build() {
+            return new AsyncProducer(this);
+        }
+
+        /**
+         * Validate whether the fields contained in this Builder as set accordingly.
+         *
+         * @throws if one field is asserted to be incorrect according to the Builder's
+         *                                    specifications
+         */
+        protected void validate() {
+
         }
     }
 

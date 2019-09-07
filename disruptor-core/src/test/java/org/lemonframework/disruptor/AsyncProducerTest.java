@@ -30,14 +30,13 @@ public class AsyncProducerTest {
 
     @Test
     public void send() {
-        final AsyncProducer producer = new AsyncProducer(
-                AsyncProducer.builder()
+        final AsyncProducer producer = AsyncProducer.builder()
                         .setAutoDestroy(true)
                         .setConsumerCount(60)
                         .setConsumer(new MyConsumer())
-                );
+                        .build();
 
-        IntStream.range(0, 1000)
+        IntStream.range(0, 10)
                 .forEach(i -> {
                     final MyData myData = new MyData();
                     myData.setName("zhangsan:" + String.valueOf(i));

@@ -61,7 +61,7 @@ public class AsyncProducer implements Disposable {
         Executor executor = builder.executor;
         if (executor == null) {
             //优化
-            executorService = MixUtil.createFixThreadPool(builder.threadPoolSize,
+            executorService = MixUtil.createFixThreadPool(builder.consumerCount,
                     builder.consumerName);
             executor = executorService;
         } else {
@@ -136,8 +136,7 @@ public class AsyncProducer implements Disposable {
         private int bufferSize = DEFAULT_BUFFER_SIZE;
         private ProducerType producerType = ProducerType.MULTI;
         private WaitStrategy waitStrategy = new BlockingWaitStrategy();
-        private int consumerCount = 1;
-        private int threadPoolSize = 16;
+        private int consumerCount = 16;
         private AsyncConsumer consumer = data -> {
             throw new RuntimeException("Not Config Asynchronous Conusmer!!");
         };
@@ -145,11 +144,6 @@ public class AsyncProducer implements Disposable {
 
         public Builder setAutoDestroy(boolean autoDestroy) {
             this.autoDestroy = autoDestroy;
-            return this;
-        }
-
-        public Builder setThreadPoolSize(int threadPoolSize) {
-            this.threadPoolSize = threadPoolSize;
             return this;
         }
 

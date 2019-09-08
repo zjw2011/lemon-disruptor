@@ -28,8 +28,8 @@ import com.lmax.disruptor.WaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
 import com.lmax.disruptor.dsl.ProducerType;
 import org.lemonframework.commons.Disposable;
-import org.lemonframework.commons.LemonThreadFactory;
 import org.lemonframework.commons.MixUtil;
+import org.lemonframework.commons.NamedThreadFactory;
 import org.lemonframework.commons.ShutdownHook;
 
 /**
@@ -72,7 +72,7 @@ public class AsyncProducer implements Disposable {
 
         disruptor = new Disruptor<>(() -> new DisruptorEvent(),
                 builder.bufferSize,
-                new LemonThreadFactory(builder.consumerName),
+                new NamedThreadFactory(builder.consumerName),
                 builder.producerType,
                 builder.waitStrategy);
 

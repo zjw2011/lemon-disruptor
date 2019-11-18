@@ -16,6 +16,9 @@
 
 package org.lemonframework.disruptor;
 
+import java.util.Objects;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 import org.junit.Test;
@@ -33,24 +36,30 @@ public class AsyncProducerTest {
         final AsyncProducer producer = AsyncProducer.builder()
                         .setAutoDestroy(true)
                         .setConsumerCount(60)
+//                        .setBufferSize(1024 * 1024)
                         .setConsumer(new MyConsumer())
                         .build();
 
-        IntStream.range(0, 10)
+        IntStream.range(0, 100000)
                 .forEach(i -> {
                     final MyData myData = new MyData();
                     myData.setName("zhangsan:" + String.valueOf(i));
                     producer.send(myData);
+//                    try {
+//                        TimeUnit.MILLISECONDS.sleep(10);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
                 });
 
-//        try {
-//            TimeUnit.SECONDS.sleep(2);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            TimeUnit.HOURS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static class MyData implements AsyncData {
+    public static class MyData extends AsyncData {
 
         private String name;
 
@@ -65,12 +74,25 @@ public class AsyncProducerTest {
     }
 
     public static class MyConsumer implements AsyncConsumer<MyData> {
+        private static final CountDownLatch COUNT = new CountDownLatch(100000);
 
         @Override
         public void fire(MyData data) {
             System.out.println("//////////////////START//////////////");
+            if (Objects.isNull(data)) {
+                System.out.println(Thread.currentThread().getName() + ":" + "data is null");
+                return;
+            }
             System.out.println(Thread.currentThread().getName() + ":" + data.getName());
             System.out.println("//////////////////END//////////////");
+            COUNT.countDown();
+            System.out.println("count:" + COUNT.getCount());
+
+            try {
+                TimeUnit.MILLISECONDS.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

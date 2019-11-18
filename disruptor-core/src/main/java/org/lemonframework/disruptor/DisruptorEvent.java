@@ -16,6 +16,8 @@
 
 package org.lemonframework.disruptor;
 
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 /**
  * 异步事件.
  *
@@ -24,32 +26,25 @@ package org.lemonframework.disruptor;
  */
 public class DisruptorEvent {
 
-    private long segmentId;
-
-    private AsyncData data;
+    private ConcurrentLinkedQueue<AsyncData> queue = new ConcurrentLinkedQueue<>();
 
     /**
      * clear data help gc.
      */
-    public void clear() {
-        this.data = null;
-    }
+//    public void clear() {
+//        this.data = null;
+//    }
 
     public AsyncData getData() {
-        return data;
+        return queue.poll();
     }
 
     public void setData(AsyncData data) {
-        this.data = data;
+        queue.add(data);
     }
 
-    public long getSegmentId() {
-        return segmentId;
-    }
-
-    public DisruptorEvent setSegmentId(long segmentId) {
-        this.segmentId = segmentId;
-        return this;
+    public int size() {
+        return queue.size();
     }
 
     public String getSimpleName() {

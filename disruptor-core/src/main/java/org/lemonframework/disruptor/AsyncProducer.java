@@ -104,6 +104,15 @@ public class AsyncProducer implements Disposable {
         ringBuffer.publishEvent(new DisruptorEventTranslator(), data);
     }
 
+    /**
+     * send disruptor data.
+     *
+     * @param data 用户数据.
+     */
+    public synchronized void singleSend(final AsyncData data) {
+        send(data);
+    }
+
     public void stop() {
         if (!started) {
             return;
@@ -214,6 +223,7 @@ public class AsyncProducer implements Disposable {
 
         @Override
         public void handleEventException(Throwable ex, long sequence, Object event) {
+            ex.printStackTrace();
             logger.error("Exception occurred while processing a {}.",
                     ((DisruptorEvent) event).getSimpleName(), ex);
         }

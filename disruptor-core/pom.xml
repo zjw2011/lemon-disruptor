@@ -22,10 +22,15 @@
             <groupId>org.lemonframework</groupId>
             <artifactId>lemon-core</artifactId>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.axonframework</groupId>-->
+            <!--<artifactId>axon-spring-boot-starter</artifactId>-->
+            <!--<version>4.1</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>org.axonframework</groupId>
-            <artifactId>axon-spring-boot-starter</artifactId>
-            <version>4.1</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>

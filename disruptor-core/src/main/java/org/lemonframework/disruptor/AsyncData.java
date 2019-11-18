@@ -16,11 +16,27 @@
 
 package org.lemonframework.disruptor;
 
+import java.io.Serializable;
+
 /**
  * 异步数据,客户自定义实现.
  *
  * @author jiawei
  * @since 1.0.0
  */
-public interface AsyncData {
+public class AsyncData implements Serializable {
+    private static final long serialVersionUID = -2449741731766907208L;
+    private long segmentId;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public long getSegmentId() {
+        return segmentId;
+    }
+
+    public void setSegmentId(long segmentId) {
+        this.segmentId = segmentId;
+    }
 }

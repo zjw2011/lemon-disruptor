@@ -27,7 +27,7 @@ import com.lmax.disruptor.EventTranslatorOneArg;
 public class DisruptorEventTranslator implements EventTranslatorOneArg<DisruptorEvent, AsyncData> {
     @Override
     public void translateTo(DisruptorEvent event, long sequence, AsyncData data) {
+        data.setSegmentId(sequence);
         event.setData(data);
-        event.setSegmentId(sequence);
     }
 }

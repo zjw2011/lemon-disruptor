@@ -52,13 +52,13 @@ public class DisruptorWorkerHandler implements WorkHandler<DisruptorEvent> {
 
         executor.execute(() -> {
             final AsyncData data = event.getData();
-            consumer.fire(data);
             if (logger.isInfoEnabled()) {
                 logger.info("Thread:{}, sequence:{}, size: {}",
                         Thread.currentThread().getName(),
                         data.getSequence(),
                         event.size());
             }
+            consumer.fire(data);
         });
     }
 

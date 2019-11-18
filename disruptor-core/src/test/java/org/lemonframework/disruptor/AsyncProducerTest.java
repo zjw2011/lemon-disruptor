@@ -74,11 +74,12 @@ public class AsyncProducerTest {
         }
     }
 
-    public static class MyConsumer implements AsyncConsumer<MyData> {
+    public static class MyConsumer implements AsyncConsumer {
         private static final CountDownLatch COUNT = new CountDownLatch(100000);
 
         @Override
-        public void fire(MyData data) {
+        public void fire(AsyncData asyncData) {
+            final MyData data = (MyData) asyncData;
             System.out.println("//////////////////START//////////////");
             if (Objects.isNull(data)) {
                 System.out.println(Thread.currentThread().getName() + ":" + "data is null");

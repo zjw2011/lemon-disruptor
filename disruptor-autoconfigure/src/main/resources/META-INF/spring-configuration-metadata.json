@@ -33,7 +33,7 @@
       "sourceType": "org.lemonframework.disruptor.autoconfigure.DisruptorProperties",
       "defaultValue": true,
       "name": "lemon.disruptor.multi",
-      "description": "生产者类型.",
+      "description": "producer type.",
       "type": "java.lang.Boolean"
     }
   ]

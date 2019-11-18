@@ -40,7 +40,8 @@ public class AsyncProducerTest {
                         .setConsumer(new MyConsumer())
                         .build();
 
-        IntStream.range(0, 100000)
+//        IntStream.range(0, 100000)
+        IntStream.range(0, 100)
                 .forEach(i -> {
                     final MyData myData = new MyData();
                     myData.setName("zhangsan:" + String.valueOf(i));

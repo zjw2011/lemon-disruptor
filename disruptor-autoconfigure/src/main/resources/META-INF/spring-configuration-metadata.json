@@ -28,6 +28,13 @@
       "name": "lemon.disruptor.consumerName",
       "description": "Consumser Name.",
       "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.lemonframework.disruptor.autoconfigure.DisruptorProperties",
+      "defaultValue": true,
+      "name": "lemon.disruptor.multi",
+      "description": "生产者类型.",
+      "type": "java.lang.Boolean"
     }
   ]
 }

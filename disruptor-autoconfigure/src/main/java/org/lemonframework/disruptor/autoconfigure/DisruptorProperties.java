@@ -33,6 +33,8 @@ public class DisruptorProperties {
 
     private int consumerSize = 16;
 
+    private boolean multi = true;
+
     private String consumerName = "lemon";
 
     public int getBufferSize() {
@@ -57,5 +59,13 @@ public class DisruptorProperties {
 
     public void setConsumerName(String consumerName) {
         this.consumerName = consumerName;
+    }
+
+    public boolean isMulti() {
+        return multi;
+    }
+
+    public void setMulti(boolean multi) {
+        this.multi = multi;
     }
 }

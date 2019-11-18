@@ -21,6 +21,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.lmax.disruptor.dsl.ProducerType;
 import org.lemonframework.disruptor.AsyncConsumer;
 import org.lemonframework.disruptor.AsyncProducer;
 
@@ -49,6 +50,8 @@ public class DisruptorAutoConfiguration {
                         .setConsumerCount(properties.getConsumerSize())
                         .setConsumerName(properties.getConsumerName())
                         .setConsumer(asyncConsumer)
+                        .setProducerType(properties.isMulti() ?
+                                ProducerType.MULTI : ProducerType.SINGLE)
                         .build();
     }
 

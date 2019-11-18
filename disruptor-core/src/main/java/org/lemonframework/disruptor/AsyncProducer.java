@@ -97,6 +97,9 @@ public class AsyncProducer implements Disposable {
      * @param data 用户数据.
      */
     public void send(final AsyncData data) {
+        if (disruptorShutDown) {
+            throw new IllegalStateException("Disruptor has been shut down. Cannot send data");
+        }
         final RingBuffer<DisruptorEvent> ringBuffer = disruptor.getRingBuffer();
         ringBuffer.publishEvent(new DisruptorEventTranslator(), data);
     }

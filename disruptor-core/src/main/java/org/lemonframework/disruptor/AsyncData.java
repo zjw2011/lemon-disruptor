@@ -26,17 +26,17 @@ import java.io.Serializable;
  */
 public class AsyncData implements Serializable {
     private static final long serialVersionUID = -2449741731766907208L;
-    private long segmentId;
+    private long sequence;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    public long getSegmentId() {
-        return segmentId;
+    public long getSequence() {
+        return sequence;
     }
 
-    public void setSegmentId(long segmentId) {
-        this.segmentId = segmentId;
+    public void setSequence(long sequence) {
+        this.sequence = sequence;
     }
 }

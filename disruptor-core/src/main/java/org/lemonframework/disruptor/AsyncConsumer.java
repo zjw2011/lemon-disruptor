@@ -23,7 +23,7 @@ package org.lemonframework.disruptor;
  * @since 1.0.0
  */
 @FunctionalInterface
-public interface AsyncConsumer<T extends AsyncData> {
+public interface AsyncConsumer {
 
-    void fire(T data);
+    void fire(AsyncData data);
 }

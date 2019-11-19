@@ -50,6 +50,7 @@ public class DisruptorAutoConfiguration {
                         .setConsumerCount(properties.getConsumerSize())
                         .setConsumerName(properties.getConsumerName())
                         .setConsumer(asyncConsumer)
+                        .setGlobalQueue(properties.isGlobalQueue())
                         .setProducerType(properties.isMulti() ?
                                 ProducerType.MULTI : ProducerType.SINGLE)
                         .build();

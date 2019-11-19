@@ -35,6 +35,8 @@ public class DisruptorProperties {
 
     private boolean multi = true;
 
+    private boolean globalQueue = true;
+
     private String consumerName = "lemon";
 
     public int getBufferSize() {
@@ -67,5 +69,13 @@ public class DisruptorProperties {
 
     public void setMulti(boolean multi) {
         this.multi = multi;
+    }
+
+    public boolean isGlobalQueue() {
+        return globalQueue;
+    }
+
+    public void setGlobalQueue(boolean globalQueue) {
+        this.globalQueue = globalQueue;
     }
 }

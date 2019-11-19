@@ -35,6 +35,14 @@
       "name": "lemon.disruptor.multi",
       "description": "producer type.",
       "type": "java.lang.Boolean"
+    },
+    {
+      "sourceType": "org.lemonframework.disruptor.autoconfigure.DisruptorProperties",
+      "defaultValue": true,
+      "name": "lemon.disruptor.globalQueue",
+      "description": "global queue.",
+      "type": "java.lang.Boolean"
     }
+
   ]
 }

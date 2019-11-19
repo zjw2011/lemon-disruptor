@@ -57,11 +57,11 @@ public class AsyncProducerTest {
 //                    }
                 });
 
-        try {
-            TimeUnit.HOURS.sleep(1);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            TimeUnit.HOURS.sleep(1);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public static class MyData extends AsyncData {

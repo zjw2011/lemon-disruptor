@@ -41,6 +41,7 @@ public class AsyncProducerTest {
                         .setConsumerCount(60)
 //                        .setBufferSize(1024 * 1024)
                         .setConsumer(new MyConsumer())
+                        .setGlobalQueue(false)
                         .build();
 
 //        IntStream.range(0, 100000)
@@ -56,7 +57,7 @@ public class AsyncProducerTest {
 //                        e.printStackTrace();
 //                    }
                 });
-
+//
 //        try {
 //            TimeUnit.HOURS.sleep(1);
 //        } catch (InterruptedException e) {

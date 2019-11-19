@@ -70,7 +70,7 @@ public class AsyncProducer implements Disposable {
 
         coolingDownPeriod = builder.coolingDownPeriod;
 
-        disruptor = new Disruptor<>(() -> new DisruptorEvent(),
+        disruptor = new Disruptor<>(() -> new DisruptorEvent(builder.globalQueue),
                 builder.bufferSize,
                 new NamedThreadFactory(builder.consumerName),
                 builder.producerType,
@@ -153,7 +153,12 @@ public class AsyncProducer implements Disposable {
             throw new RuntimeException("Not Config Asynchronous Conusmer!!");
         };
         private boolean autoDestroy = true;
-        private boolean memory = true;
+        private boolean globalQueue = true;
+
+        public Builder setGlobalQueue(boolean globalQueue) {
+            this.globalQueue = globalQueue;
+            return this;
+        }
 
         public Builder setAutoDestroy(boolean autoDestroy) {
             this.autoDestroy = autoDestroy;

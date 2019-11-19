@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class DisruptorEvent {
 
-    private Queue<AsyncData> queue = new ConcurrentLinkedQueue<>();
+    private static final Queue<AsyncData> queue = new ConcurrentLinkedQueue<>();
 
     /**
      * clear data help gc.

@@ -153,6 +153,7 @@ public class AsyncProducer implements Disposable {
             throw new RuntimeException("Not Config Asynchronous Conusmer!!");
         };
         private boolean autoDestroy = true;
+        private boolean memory = true;
 
         public Builder setAutoDestroy(boolean autoDestroy) {
             this.autoDestroy = autoDestroy;

@@ -16,6 +16,9 @@
 
 package org.lemonframework.disruptor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.lmax.disruptor.EventTranslatorOneArg;
 
 /**
@@ -25,9 +28,19 @@ import com.lmax.disruptor.EventTranslatorOneArg;
  * @since 1.0.0
  */
 public class DisruptorEventTranslator implements EventTranslatorOneArg<DisruptorEvent, AsyncData> {
+
+    private static final Logger logger = LoggerFactory.getLogger(DisruptorEventTranslator.class);
+
     @Override
     public void translateTo(DisruptorEvent event, long sequence, AsyncData data) {
         data.setSequence(sequence);
         event.setData(data);
+        if (logger.isInfoEnabled()) {
+            logger.info("producer->Thread:{}, sequence:{}, size: {}, data:{}",
+                    Thread.currentThread().getName(),
+                    sequence,
+                    event.size(),
+                    data);
+        }
     }
 }

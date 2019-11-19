@@ -21,6 +21,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.junit.Test;
 
 /**
@@ -42,6 +45,7 @@ public class AsyncProducerTest {
 
 //        IntStream.range(0, 100000)
         IntStream.range(0, 100)
+                .parallel()
                 .forEach(i -> {
                     final MyData myData = new MyData();
                     myData.setName("zhangsan:" + String.valueOf(i));
@@ -53,11 +57,11 @@ public class AsyncProducerTest {
 //                    }
                 });
 
-//        try {
-//            TimeUnit.HOURS.sleep(1);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            TimeUnit.HOURS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static class MyData extends AsyncData {
@@ -72,24 +76,26 @@ public class AsyncProducerTest {
             this.name = name;
             return this;
         }
+
+        @Override
+        public String toString() {
+            return name;
+        }
     }
 
     public static class MyConsumer implements AsyncConsumer {
         private static final CountDownLatch COUNT = new CountDownLatch(100000);
+        private static final Logger log = LoggerFactory.getLogger(MyConsumer.class);
 
         @Override
         public void fire(AsyncData asyncData) {
             final MyData data = (MyData) asyncData;
-            System.out.println("//////////////////START//////////////");
             if (Objects.isNull(data)) {
-                System.out.println(Thread.currentThread().getName() + ":" + "data is null");
+                log.warn("consumer->" + Thread.currentThread().getName() + ":" + "data is null");
                 return;
             }
-            System.out.println(Thread.currentThread().getName() + ":" + data.getName());
-            System.out.println("//////////////////END//////////////");
             COUNT.countDown();
-            System.out.println("count:" + COUNT.getCount());
-
+            log.info("consumer-> Thread:{}, data:{}, count: {}", Thread.currentThread().getName(), data.getName(), COUNT.getCount());
             try {
                 TimeUnit.MILLISECONDS.sleep(100);
             } catch (InterruptedException e) {

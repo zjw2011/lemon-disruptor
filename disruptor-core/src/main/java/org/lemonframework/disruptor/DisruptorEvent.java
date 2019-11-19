@@ -16,6 +16,7 @@
 
 package org.lemonframework.disruptor;
 
+import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -26,7 +27,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class DisruptorEvent {
 
-    private ConcurrentLinkedQueue<AsyncData> queue = new ConcurrentLinkedQueue<>();
+    private Queue<AsyncData> queue = new ConcurrentLinkedQueue<>();
 
     /**
      * clear data help gc.

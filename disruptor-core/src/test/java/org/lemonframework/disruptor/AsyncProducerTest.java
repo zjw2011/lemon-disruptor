@@ -38,7 +38,7 @@ public class AsyncProducerTest {
     public void send() {
         final AsyncProducer producer = AsyncProducer.builder()
                         .setAutoDestroy(true)
-                        .setConsumerCount(60)
+//                        .setConsumerCount(60)
 //                        .setBufferSize(1024 * 1024)
                         .setConsumer(new MyConsumer())
                         .setGlobalQueue(false)
@@ -58,11 +58,11 @@ public class AsyncProducerTest {
 //                    }
                 });
 //
-//        try {
-//            TimeUnit.HOURS.sleep(1);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            TimeUnit.HOURS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public static class MyData extends AsyncData {

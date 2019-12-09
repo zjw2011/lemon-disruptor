@@ -61,7 +61,7 @@ public class AsyncProducer implements Disposable {
         Executor executor = builder.executor;
         if (executor == null) {
             //优化
-            executorService = MixUtil.createFixThreadPool(builder.consumerCount,
+            executorService = MixUtil.createFixThreadPool(builder.consumerCount * 2,
                     builder.consumerName);
             executor = executorService;
         } else {

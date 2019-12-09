@@ -52,7 +52,7 @@ public class DisruptorWorkerHandler implements WorkHandler<DisruptorEvent> {
         final AsyncData data = event.getData();
         if (logger.isInfoEnabled()) {
             final int size = event.size();
-            logger.info("Thread:{}, sequence:{}, size: {}",
+            logger.info("preConsumer->Thread:{}, sequence:{}, size: {}",
                     Thread.currentThread().getName(),
                     data.getSequence(),
                     size);

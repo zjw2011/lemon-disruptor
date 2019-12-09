@@ -49,7 +49,7 @@ public class AsyncProducerTest {
                 .parallel()
                 .forEach(i -> {
                     final MyData myData = new MyData();
-                    myData.setName("zhangsan:" + String.valueOf(i));
+                    myData.setName("zhangsan:" + String.format("%06d", i));
                     producer.send(myData);
 //                    try {
 //                        TimeUnit.MILLISECONDS.sleep(10);

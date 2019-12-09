@@ -57,6 +57,7 @@ public class DisruptorWorkerHandler implements WorkHandler<DisruptorEvent> {
                     data.getSequence(),
                     size);
         }
+        event.clear();
         executor.execute(() -> consumer.fire(data));
     }
 

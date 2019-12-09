@@ -16,9 +16,6 @@
 
 package org.lemonframework.disruptor;
 
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
-
 /**
  * 异步事件.
  *
@@ -27,18 +24,40 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class DisruptorEvent {
 
-    private Queue<AsyncData> queue = new ConcurrentLinkedQueue<>();
+//    private Queue<AsyncData> queue = new ConcurrentLinkedQueue<>();
+//
+//    public AsyncData getData() {
+//        return queue.poll();
+//    }
+//
+//    public void setData(AsyncData data) {
+//        queue.add(data);
+//    }
+//
+//    public int size() {
+//        return queue.size();
+//    }
+//
+//    public String getSimpleName() {
+//        return "disruptorEvent";
+//    }
+
+    private AsyncData data;
 
     public AsyncData getData() {
-        return queue.poll();
+        return this.data;
     }
 
     public void setData(AsyncData data) {
-        queue.add(data);
+        this.data = data;
     }
 
     public int size() {
-        return queue.size();
+        return 0;
+    }
+
+    public void clear() {
+        this.data = null;
     }
 
     public String getSimpleName() {

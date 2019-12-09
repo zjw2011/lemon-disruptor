@@ -31,9 +31,10 @@ public class DisruptorEvent {
 
     private Queue<AsyncData> queue;
 
-    private boolean global = true;
+    private boolean global;
 
     public DisruptorEvent() {
+        this(true);
     }
 
     public DisruptorEvent(boolean global) {

@@ -50,8 +50,8 @@ public class DisruptorWorkerHandler implements WorkHandler<DisruptorEvent> {
     @Override
     public void onEvent(final DisruptorEvent event) {
         final AsyncData data = event.getData();
-        final int size = event.size();
         if (logger.isInfoEnabled()) {
+            final int size = event.size();
             logger.info("Thread:{}, sequence:{}, size: {}",
                     Thread.currentThread().getName(),
                     data.getSequence(),

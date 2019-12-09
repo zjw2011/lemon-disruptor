@@ -49,14 +49,14 @@ public class DisruptorWorkerHandler implements WorkHandler<DisruptorEvent> {
 
     @Override
     public void onEvent(final DisruptorEvent event) {
-
+        final AsyncData data = event.getData();
+        final int size = event.size();
         executor.execute(() -> {
-            final AsyncData data = event.getData();
             if (logger.isInfoEnabled()) {
                 logger.info("Thread:{}, sequence:{}, size: {}",
                         Thread.currentThread().getName(),
                         data.getSequence(),
-                        event.size());
+                        size);
             }
             consumer.fire(data);
         });

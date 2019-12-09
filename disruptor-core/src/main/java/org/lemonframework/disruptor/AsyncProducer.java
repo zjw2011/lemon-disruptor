@@ -70,7 +70,7 @@ public class AsyncProducer implements Disposable {
 
         coolingDownPeriod = builder.coolingDownPeriod;
 
-        disruptor = new Disruptor<>(() -> new DisruptorEvent(builder.globalQueue),
+        disruptor = new Disruptor<>(() -> new DisruptorEvent(),
                 builder.bufferSize,
                 new NamedThreadFactory(builder.consumerName),
                 builder.producerType,

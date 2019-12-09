@@ -27,42 +27,17 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class DisruptorEvent {
 
-    private static final Queue<AsyncData> queueGlobal = new ConcurrentLinkedQueue<>();
-
-    private Queue<AsyncData> queue;
-
-    private boolean global;
-
-    public DisruptorEvent() {
-        this(true);
-    }
-
-    public DisruptorEvent(boolean global) {
-        this.global = global;
-        if (!global) {
-            this.queue = new ConcurrentLinkedQueue<>();
-        }
-    }
+    private Queue<AsyncData> queue = new ConcurrentLinkedQueue<>();
 
     public AsyncData getData() {
-        if (global) {
-            return queueGlobal.poll();
-        }
         return queue.poll();
     }
 
     public void setData(AsyncData data) {
-        if (global) {
-            queueGlobal.add(data);
-            return;
-        }
         queue.add(data);
     }
 
     public int size() {
-        if (global) {
-            return queueGlobal.size();
-        }
         return queue.size();
     }
 

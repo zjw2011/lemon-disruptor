@@ -66,6 +66,6 @@ public class DisruptorEvent {
     }
 
     public String getSimpleName() {
-        return "";
+        return "disruptorEvent";
     }
 }

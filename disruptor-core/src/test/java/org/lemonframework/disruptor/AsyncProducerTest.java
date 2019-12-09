@@ -24,8 +24,6 @@ import java.util.stream.IntStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import org.junit.Test;
-
 /**
  * lemon-disruptor.
  *
@@ -34,7 +32,7 @@ import org.junit.Test;
  */
 public class AsyncProducerTest {
 
-    @Test
+//    @Test
     public void send() {
         final AsyncProducer producer = AsyncProducer.builder()
                         .setAutoDestroy(true)
